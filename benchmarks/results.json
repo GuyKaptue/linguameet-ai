@@ -1,0 +1,142 @@
+{
+  "environment": {
+    "cpu": "Intel(R) Xeon(R) Processor @ 2.10GHz",
+    "cores": 2,
+    "python": "3.13.18",
+    "machine": "x86_64",
+    "os": "Linux-6.18.44-fc-v726-x86_64-with-glibc2.39"
+  },
+  "vad": {
+    "window_ms": 32.0,
+    "inference_ms_per_window": {
+      "n": 375,
+      "mean": 0.14,
+      "p50": 0.13,
+      "p95": 0.2,
+      "max": 0.45
+    },
+    "realtime_factor": 0.00428,
+    "end_of_speech_delay_ms": {
+      "n": 4,
+      "mean": 320.0,
+      "p50": 320.0,
+      "p95": 320.0,
+      "max": 320.0
+    },
+    "config": {
+      "min_silence_ms": 300,
+      "speech_pad_ms": 100
+    }
+  },
+  "nmt_batching": {
+    "requests": 16,
+    "cost_model_ms": {
+      "setup": 80.0,
+      "per_item": 10.0
+    },
+    "batched_total_ms": 242.3,
+    "batch_sizes": [
+      16
+    ],
+    "unbatched_estimate_ms": 1440.0,
+    "speedup": 5.94
+  },
+  "pipeline": {
+    "mock models": {
+      "utterances": 15,
+      "delays_s": {},
+      "speech_end_to_subtitle_wall_ms": {
+        "n": 15,
+        "mean": 355.91,
+        "p50": 355.66,
+        "p95": 360.23,
+        "max": 360.38
+      },
+      "from_vad_decision_ms": {
+        "n": 15,
+        "mean": 22.24,
+        "p50": 22.34,
+        "p95": 22.83,
+        "max": 22.89
+      },
+      "stage_asr_ms": {
+        "n": 15,
+        "mean": 0.78,
+        "p50": 0.76,
+        "p95": 0.94,
+        "max": 0.99
+      },
+      "stage_nmt_ms": {
+        "n": 15,
+        "mean": 21.37,
+        "p50": 21.46,
+        "p95": 21.86,
+        "max": 21.89
+      },
+      "stage_publish_ms": {
+        "n": 15,
+        "mean": 0.09,
+        "p50": 0.07,
+        "p95": 0.19,
+        "max": 0.39
+      },
+      "speech_end_to_first_audio_ms": {
+        "n": 30,
+        "mean": 360.4,
+        "p50": 360.53,
+        "p95": 365.5,
+        "max": 368.08
+      }
+    },
+    "simulated model delays": {
+      "utterances": 15,
+      "delays_s": {
+        "asr_delay": 0.35,
+        "nmt_delay": 0.15,
+        "tts_delay": 0.12
+      },
+      "speech_end_to_subtitle_wall_ms": {
+        "n": 15,
+        "mean": 843.7,
+        "p50": 851.66,
+        "p95": 856.57,
+        "max": 857.4
+      },
+      "from_vad_decision_ms": {
+        "n": 15,
+        "mean": 510.23,
+        "p50": 522.4,
+        "p95": 524.08,
+        "max": 524.54
+      },
+      "stage_asr_ms": {
+        "n": 15,
+        "mean": 337.98,
+        "p50": 350.95,
+        "p95": 351.51,
+        "max": 351.55
+      },
+      "stage_nmt_ms": {
+        "n": 15,
+        "mean": 172.19,
+        "p50": 172.02,
+        "p95": 173.27,
+        "max": 173.6
+      },
+      "stage_publish_ms": {
+        "n": 15,
+        "mean": 0.07,
+        "p50": 0.06,
+        "p95": 0.1,
+        "max": 0.14
+      },
+      "speech_end_to_first_audio_ms": {
+        "n": 30,
+        "mean": 967.91,
+        "p50": 975.69,
+        "p95": 982.0,
+        "max": 983.75
+      }
+    }
+  }
+}

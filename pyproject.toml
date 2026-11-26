@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "linguameet-ai"
+version = "0.1.0"
+description = "Real-time multilingual meeting platform: VAD -> streaming ASR -> NMT -> TTS over LiveKit"
+requires-python = ">=3.10"
+readme = "README.md"
+dependencies = [
+    "numpy>=1.24",
+    "scipy>=1.10",
+    "pydantic>=2.5",
+    "pydantic-settings>=2.1",
+    # VAD: Silero ONNX model executed with onnxruntime (no torch needed)
+    "onnxruntime>=1.17",
+    # ASR (https://github.com/SYSTRAN/faster-whisper): CTranslate2 + PyAV, no PyTorch
+    "faster-whisper>=1.0",
+    # NMT: NLLB-200 through CTranslate2
+    "ctranslate2>=4.0",
+    "sentencepiece>=0.1.99",
+    # Real-time transport (livekit = rtc client SDK, livekit-api = tokens / server API)
+    "livekit>=1.0",
+    "livekit-api>=1.0",
+]
+
+[project.optional-dependencies]
+# NLLB tokenizer via Hugging Face (needs network access to the Hub for the tokenizer files)
+nmt = ["transformers>=4.36"]
+# Piper TTS (GPLv3), verified with piper-tts 1.8.0; voices must be downloaded separately into TTS_VOICES_DIR
+tts = ["piper-tts>=1.3"]
+demo = ["aiohttp>=3.9"]
+api = ["fastapi>=0.104", "uvicorn[standard]>=0.24", "httpx>=0.25"]
+dev = ["aiohttp>=3.9", "pytest>=7.4", "pytest-asyncio>=0.21", "sacrebleu>=2.4"]
+
+[tool.setuptools.packages.find]
+include = ["shared*", "gateway*", "services*", "pipeline*", "meetdemo*"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests", "services", "gateway", "meetdemo", "scripts"]
+python_files = ["test_*.py"]
+asyncio_mode = "auto"
+markers = [
+    "slow: tests that load real models or take more than a few seconds",
+    "e2e: end-to-end pipeline tests",
+]
+filterwarnings = ["ignore::DeprecationWarning"]

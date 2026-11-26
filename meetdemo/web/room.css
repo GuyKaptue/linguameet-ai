@@ -1,0 +1,24 @@
+.demo-banner { background: var(--warn); color: #1b1b1b; font-size: .8rem; padding: 6px 12px; text-align: center; }
+.bar { display: flex; flex-wrap: wrap; gap: 12px; align-items: end; justify-content: space-between; max-width: 1000px; margin: 0 auto; padding: 12px 16px 0; }
+.bar h1 { margin: 0; }
+.room-name { font-size: .85rem; font-weight: 400; color: var(--muted); margin-left: 8px; }
+.controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: end; }
+.room { max-width: 1000px; margin: 0 auto; padding: 8px 16px 32px; display: grid; gap: 16px; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
+.tile { background: var(--card); border-radius: 14px; padding: 14px; display: grid; gap: 10px; border: 2px solid transparent; transition: border-color .15s, box-shadow .15s; }
+.tile.speaking { border-color: var(--accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 25%, transparent); }
+.tile .who { display: flex; align-items: center; gap: 10px; }
+.avatar { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; color: #0f1419; background: var(--accent); }
+.tile[data-id="bruno"] .avatar { background: #ffb454; }
+.tile[data-id="you"] .avatar { background: #8bd48b; }
+.tile .name { font-weight: 600; }
+.tile .meta { color: var(--muted); font-size: .8rem; }
+.tile .say { color: var(--muted); font-size: .8rem; min-height: 2.4em; }
+.tile .bars { display: flex; gap: 3px; height: 18px; align-items: end; visibility: hidden; }
+.tile.speaking .bars { visibility: visible; }
+.bars i { display: block; width: 4px; background: var(--accent); border-radius: 2px; animation: bounce .8s infinite ease-in-out; }
+.bars i:nth-child(2) { animation-delay: .1s; } .bars i:nth-child(3) { animation-delay: .2s; } .bars i:nth-child(4) { animation-delay: .3s; }
+@keyframes bounce { 0%,100% { height: 4px; } 50% { height: 18px; } }
+@media (prefers-reduced-motion: reduce) { .bars i { animation: none; height: 12px; } }
+.latency { color: var(--muted); font-size: .85rem; margin: 0; }
+.stage { display: grid; gap: 8px; }

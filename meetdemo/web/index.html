@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LinguaMeet AI - demo room</title>
+  <link rel="stylesheet" href="/lib/style.css">
+  <link rel="stylesheet" href="/static/room.css">
+</head>
+<body>
+  <div class="demo-banner">Standalone demo: real VAD, streaming logic, batching and subtitle protocol; <b>scripted transcripts, mock translation and tone "speech"</b> (no AI model weights here).</div>
+  <header class="bar">
+    <h1>LinguaMeet AI <span class="room-name">Weekly sync</span></h1>
+    <div class="controls">
+      <label>I want to read / hear
+        <select id="listen-lang"></select>
+      </label>
+      <label>Subtitles
+        <select id="mode">
+          <option value="both">Original + translated</option>
+          <option value="translated">Translated only</option>
+          <option value="original">Original only</option>
+        </select>
+      </label>
+      <button id="sound" type="button" aria-pressed="false">Sound off</button>
+    </div>
+  </header>
+  <main class="room">
+    <section id="tiles" class="tiles" aria-label="Participants"></section>
+    <section class="stage">
+      <p id="status" role="status">Connecting…</p>
+      <p id="latency" class="latency" hidden></p>
+      <section id="subtitles" aria-label="Live subtitles"></section>
+    </section>
+  </main>
+  <script src="/lib/subtitles.js"></script>
+  <script src="/static/room.js"></script>
+</body>
+</html>

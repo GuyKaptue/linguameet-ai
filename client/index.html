@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LinguaMeet AI</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <h1>LinguaMeet AI</h1>
+    <form id="join" onsubmit="return false">
+      <label>Server URL <input id="url" type="text" value="ws://localhost:7880" autocomplete="off"></label>
+      <label>Access token <input id="token" type="password" autocomplete="off" placeholder="JWT from your server"></label>
+      <label>I speak
+        <select id="speak-lang">
+          <option value="en">English</option><option value="es">Español</option><option value="fr">Français</option>
+          <option value="de">Deutsch</option><option value="it">Italiano</option><option value="pt">Português</option>
+          <option value="zh">中文</option><option value="ja">日本語</option>
+        </select>
+      </label>
+      <label>I want to read / hear
+        <select id="listen-lang">
+          <option value="en">English</option><option value="es">Español</option><option value="fr">Français</option>
+          <option value="de">Deutsch</option><option value="it">Italiano</option><option value="pt">Português</option>
+          <option value="zh">中文</option><option value="ja">日本語</option>
+        </select>
+      </label>
+      <label>Subtitles
+        <select id="mode">
+          <option value="both">Original + translated</option>
+          <option value="translated">Translated only</option>
+          <option value="original">Original only</option>
+        </select>
+      </label>
+      <div class="buttons">
+        <button id="connect" type="button">Join meeting</button>
+        <button id="disconnect" type="button" disabled>Leave</button>
+        <button id="mic" type="button" disabled aria-pressed="false">Microphone off</button>
+        <button id="start-audio" type="button" hidden>Enable audio</button>
+      </div>
+    </form>
+    <p id="status" role="status" data-state="idle"></p>
+    <section id="subtitles" aria-label="Live subtitles"></section>
+    <div id="audio" hidden></div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/livekit-client@2.24.1/dist/livekit-client.umd.js"></script>
+  <script src="subtitles.js"></script>
+  <script src="app.js"></script>
+  <script>
+    LinguaApp.createApp({ document: document, LivekitClient: window.LivekitClient, storage: window.localStorage });
+  </script>
+</body>
+</html>

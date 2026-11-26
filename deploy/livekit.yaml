@@ -1,0 +1,11 @@
+# LiveKit server config for local use. Keys verified against docs.livekit.io (deployment page):
+# port 7880, rtc.tcp_port 7881, rtc.port_range_start/end (UDP), keys: {api_key: api_secret}.
+port: 7880
+log_level: info
+rtc:
+  tcp_port: 7881
+  port_range_start: 50000
+  port_range_end: 50200
+  use_external_ip: false
+keys:
+  devkey: devsecret_that_is_at_least_32_characters_long

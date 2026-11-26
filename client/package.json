@@ -1,0 +1,22 @@
+{
+  "name": "linguameet-client",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Web client for LinguaMeet AI: LiveKit room + live multilingual subtitles",
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "testMatch": [
+      "**/test_*.js"
+    ]
+  },
+  "dependencies": {
+    "livekit-client": "^2.24.1"
+  },
+  "devDependencies": {
+    "jest": "^30.5.2",
+    "jest-environment-jsdom": "^30.5.2"
+  }
+}

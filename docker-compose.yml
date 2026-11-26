@@ -1,0 +1,34 @@
+# LinguaMeet AI - real stack: LiveKit server + translation gateway + static web client.
+# Linux: host networking (recommended by LiveKit for WebRTC). On macOS/Windows host networking does not reach
+# the host: run livekit-server natively (`livekit-server --dev`) and only start `gateway` and `web`.
+# Image name `livekit/livekit-server` is the one LiveKit publishes on Docker Hub (not re-verified in this sandbox).
+services:
+  livekit:
+    image: livekit/livekit-server:latest
+    command: ["--config", "/etc/livekit.yaml", "--bind", "0.0.0.0"]
+    network_mode: host
+    volumes:
+      - ./deploy/livekit.yaml:/etc/livekit.yaml:ro
+  gateway:
+    build: .
+    network_mode: host
+    depends_on: [livekit]
+    environment:
+      LIVEKIT_URL: ws://127.0.0.1:7880
+      LIVEKIT_API_KEY: devkey
+      LIVEKIT_API_SECRET: devsecret_that_is_at_least_32_characters_long
+      ASR_MODEL_SIZE: base
+      NMT_MODEL_DIR: /models/nllb-200-distilled-600M-ct2
+      TTS_VOICES_DIR: /models/tts
+      MODELS_DIR: /models
+    volumes:
+      - ./models:/models
+      - hf-cache:/root/.cache/huggingface
+  web:
+    image: python:3.12-slim
+    command: ["python", "-m", "http.server", "8080", "-d", "/client"]
+    network_mode: host
+    volumes:
+      - ./client:/client:ro
+volumes:
+  hf-cache:
